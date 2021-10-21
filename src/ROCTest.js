@@ -103,8 +103,7 @@ for (let i = 64865; i < leakString.length - 1; i++) {
 }
 
 console.log(testData.length);
-/*
+
 for (let i = 0; i < testData.length; i++) {
-    fs.appendFileSync('./test.txt', `${testData[i]}, ${testData[i]}, ${testData[i]}, ${testLabel[i]}\n`, 'utf8');
+    fs.appendFileSync('./test.txt', `${testData[i]}, ${testLabel[i]}\n`, 'utf8');
 }
-*/
