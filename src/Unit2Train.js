@@ -128,7 +128,7 @@ async function main() {
                         var history = [];
 
                         var fitParam = {
-                            epochs: 100,
+                            epochs: 50,
                             callbacks: {
                                 onEpochEnd: function (epoch, logs) {
                                     console.log('epoch', epoch, logs, 'RMSE -> ', Math.sqrt(logs.loss));
