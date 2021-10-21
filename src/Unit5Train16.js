@@ -125,7 +125,7 @@ for (let i = 1; i <= 32; i = i * 2) {
 var activationFuncs = ['relu'];
 
 async function main() {
-    fs.writeFileSync('./unit5Report.txt', '', 'utf8');
+    fs.writeFileSync('./unit5Report16.txt', '', 'utf8');
 
     for (let node = 0; node < nodes.length; node++) {
         for (let unit = 0; unit < units.length; unit++) {
@@ -148,7 +148,7 @@ async function main() {
 
                         model = modelCreateDepth5(units[unit][0], units[unit][1], units[unit][2], units[unit][3], units[unit][4], activationFuncs[activationFunc]);
                         fs.appendFileSync(
-                            './unit5Report.txt',
+                            './unit5Report16.txt',
                             nodes[node] +
                                 ', [' +
                                 units[unit][0] +
@@ -168,7 +168,7 @@ async function main() {
 
                         model.fit(trainDataTensor, trainLabelTensor, fitParam).then(async function (result) {
                             for (let his = 0; his < history.length; his++) {
-                                fs.appendFileSync('./unit5Report.txt', 'epoch: ' + his + ', loss: ' + history[his].loss + '\n', 'utf8');
+                                fs.appendFileSync('./unit5Report16.txt', 'epoch: ' + his + ', loss: ' + history[his].loss + '\n', 'utf8');
                             }
 
                             var validationResult = model.predict(validationDataTensor);
@@ -194,7 +194,7 @@ async function main() {
                                 }
 
                                 console.log(checkPoints[checkPoint] + ' : ' + good + ', ' + noGood);
-                                fs.appendFileSync('./unit5Report.txt', checkPoints[checkPoint] + ' : ' + good + ', ' + noGood + '\n', 'utf8');
+                                fs.appendFileSync('./unit5Report16.txt', checkPoints[checkPoint] + ' : ' + good + ', ' + noGood + '\n', 'utf8');
 
                                 good = 0;
                                 noGood = 0;
@@ -202,7 +202,7 @@ async function main() {
 
                             model.save(`file://../models/${nodes[node]}_[${units[unit]}]`).then(async function () {
                                 console.log('Successfully saved the artifacts.');
-                                fs.appendFileSync('./unit5Report.txt', '====================\n', 'utf8');
+                                fs.appendFileSync('./unit5Report16.txt', '====================\n', 'utf8');
                                 resolve();
                             });
                         });
