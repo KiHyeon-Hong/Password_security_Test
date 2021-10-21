@@ -92,48 +92,6 @@ var trainLabelTensor = tf.tensor(trainLabel);
 var validationDataTensor = tf.tensor(validationData);
 var validationLabelTensor = tf.tensor(validationLabel);
 
-function modelCreateDepth1(unit1, activation) {
-    var X = tf.input({ shape: [3] });
-    var h1 = tf.layers.dense({ units: unit1, activation: activation }).apply(X);
-    var Y = tf.layers.dense({ units: 1, activation: 'sigmoid' }).apply(h1);
-
-    var model = tf.model({ inputs: X, outputs: Y });
-
-    var compileParam = { optimizer: tf.train.adam(), loss: tf.losses.meanSquaredError };
-    model.compile(compileParam);
-
-    return model;
-}
-
-function modelCreateDepth2(unit1, unit2, activation) {
-    var X = tf.input({ shape: [3] });
-    var h1 = tf.layers.dense({ units: unit1, activation: activation }).apply(X);
-    var h2 = tf.layers.dense({ units: unit2, activation: activation }).apply(h1);
-    var Y = tf.layers.dense({ units: 1, activation: 'sigmoid' }).apply(h2);
-
-    var model = tf.model({ inputs: X, outputs: Y });
-
-    var compileParam = { optimizer: tf.train.adam(), loss: tf.losses.meanSquaredError };
-    model.compile(compileParam);
-
-    return model;
-}
-
-function modelCreateDepth3(unit1, unit2, unit3, activation) {
-    var X = tf.input({ shape: [3] });
-    var h1 = tf.layers.dense({ units: unit1, activation: activation }).apply(X);
-    var h2 = tf.layers.dense({ units: unit2, activation: activation }).apply(h1);
-    var h3 = tf.layers.dense({ units: unit3, activation: activation }).apply(h2);
-    var Y = tf.layers.dense({ units: 1, activation: 'sigmoid' }).apply(h3);
-
-    var model = tf.model({ inputs: X, outputs: Y });
-
-    var compileParam = { optimizer: tf.train.adam(), loss: tf.losses.meanSquaredError };
-    model.compile(compileParam);
-
-    return model;
-}
-
 function modelCreateDepth4(unit1, unit2, unit3, unit4, activation) {
     var X = tf.input({ shape: [3] });
     var h1 = tf.layers.dense({ units: unit1, activation: activation }).apply(X);
@@ -150,96 +108,23 @@ function modelCreateDepth4(unit1, unit2, unit3, unit4, activation) {
     return model;
 }
 
-var nodes = [4, 3, 2, 1];
+var nodes = [4];
+var units = [];
 
-var units = [
-    [1, 1, 1, 1],
-    [1, 1, 1, 3],
-    [1, 1, 1, 5],
-    [1, 1, 3, 1],
-    [1, 1, 3, 3],
-    [1, 1, 3, 5],
-    [1, 1, 5, 1],
-    [1, 1, 5, 3],
-    [1, 1, 5, 5],
-    [1, 3, 1, 1],
-    [1, 3, 1, 3],
-    [1, 3, 1, 5],
-    [1, 3, 3, 1],
-    [1, 3, 3, 3],
-    [1, 3, 3, 5],
-    [1, 3, 5, 1],
-    [1, 3, 5, 3],
-    [1, 3, 5, 5],
-    [1, 5, 1, 1],
-    [1, 5, 1, 3],
-    [1, 5, 1, 5],
-    [1, 5, 3, 1],
-    [1, 5, 3, 3],
-    [1, 5, 3, 5],
-    [1, 5, 5, 1],
-    [1, 5, 5, 3],
-    [1, 5, 5, 5],
-    [3, 1, 1, 1],
-    [3, 1, 1, 3],
-    [3, 1, 1, 5],
-    [3, 1, 3, 1],
-    [3, 1, 3, 3],
-    [3, 1, 3, 5],
-    [3, 1, 5, 1],
-    [3, 1, 5, 3],
-    [3, 1, 5, 5],
-    [3, 3, 1, 1],
-    [3, 3, 1, 3],
-    [3, 3, 1, 5],
-    [3, 3, 3, 1],
-    [3, 3, 3, 3],
-    [3, 3, 3, 5],
-    [3, 3, 5, 1],
-    [3, 3, 5, 3],
-    [3, 3, 5, 5],
-    [3, 5, 1, 1],
-    [3, 5, 1, 3],
-    [3, 5, 1, 5],
-    [3, 5, 3, 1],
-    [3, 5, 3, 3],
-    [3, 5, 3, 5],
-    [3, 5, 5, 1],
-    [3, 5, 5, 3],
-    [3, 5, 5, 5],
-    [5, 1, 1, 1],
-    [5, 1, 1, 3],
-    [5, 1, 1, 5],
-    [5, 1, 3, 1],
-    [5, 1, 3, 3],
-    [5, 1, 3, 5],
-    [5, 1, 5, 1],
-    [5, 1, 5, 3],
-    [5, 1, 5, 5],
-    [5, 3, 1, 1],
-    [5, 3, 1, 3],
-    [5, 3, 1, 5],
-    [5, 3, 3, 1],
-    [5, 3, 3, 3],
-    [5, 3, 3, 5],
-    [5, 3, 5, 1],
-    [5, 3, 5, 3],
-    [5, 3, 5, 5],
-    [5, 5, 1, 1],
-    [5, 5, 1, 3],
-    [5, 5, 1, 5],
-    [5, 5, 3, 1],
-    [5, 5, 3, 3],
-    [5, 5, 3, 5],
-    [5, 5, 5, 1],
-    [5, 5, 5, 3],
-    [5, 5, 5, 5],
-];
+for (let i = 1; i <= 32; i = i * 2) {
+    for (let j = 1; j <= 32; j = j * 2) {
+        for (let k = 1; k <= 32; k = k * 2) {
+            for (let l = 1; l <= 32; l = l * 2) {
+                units.push([i, j, k, l]);
+            }
+        }
+    }
+}
 
 var activationFuncs = ['relu'];
 
 async function main() {
-    fs.writeFileSync('./report.txt', '', 'utf8');
+    fs.writeFileSync('./unit4Report.txt', '', 'utf8');
 
     for (let node = 0; node < nodes.length; node++) {
         for (let unit = 0; unit < units.length; unit++) {
@@ -258,39 +143,18 @@ async function main() {
                             },
                         };
 
-                        console.log(nodes[node], units[unit], activationFuncs[activationFunc]);
-
                         var model = null;
-                        if (nodes[node] == 1) {
-                            model = modelCreateDepth1(units[unit][0], activationFuncs[activationFunc]);
-                            unit += 26;
-                            fs.appendFileSync('./report.txt', nodes[node] + ', [' + units[unit][0] + '], ' + activationFuncs[activationFunc] + '\n', 'utf8');
-                        } else if (nodes[node] == 2) {
-                            model = modelCreateDepth2(units[unit][0], units[unit][1], activationFuncs[activationFunc]);
-                            unit += 8;
-                            fs.appendFileSync('./report.txt', nodes[node] + ', [' + units[unit][0] + ', ' + units[unit][1] + '], ' + activationFuncs[activationFunc] + '\n', 'utf8');
-                        }
-                        if (nodes[node] == 3) {
-                            model = modelCreateDepth3(units[unit][0], units[unit][1], units[unit][2], activationFuncs[activationFunc]);
-                            unit += 2;
-                            fs.appendFileSync(
-                                './report.txt',
-                                nodes[node] + ', [' + units[unit][0] + ', ' + units[unit][1] + ', ' + units[unit][2] + '], ' + activationFuncs[activationFunc] + '\n',
-                                'utf8'
-                            );
-                        } else {
-                            model = modelCreateDepth4(units[unit][0], units[unit][1], units[unit][2], units[unit][3], activationFuncs[activationFunc]);
-                            fs.appendFileSync(
-                                './report.txt',
-                                nodes[node] + ', [' + units[unit][0] + ', ' + units[unit][1] + ', ' + units[unit][2] + ', ' + units[unit][3] + '], ' + activationFuncs[activationFunc] + '\n',
-                                'utf8'
-                            );
-                        }
 
-                        /*
+                        model = modelCreateDepth4(units[unit][0], units[unit][1], units[unit][2], units[unit][3], activationFuncs[activationFunc]);
+                        fs.appendFileSync(
+                            './unit4Report.txt',
+                            nodes[node] + ', [' + units[unit][0] + ', ' + units[unit][1] + ', ' + units[unit][2] + ', ' + units[unit][3] + '], ' + activationFuncs[activationFunc] + '\n',
+                            'utf8'
+                        );
+
                         model.fit(trainDataTensor, trainLabelTensor, fitParam).then(async function (result) {
                             for (let his = 0; his < history.length; his++) {
-                                fs.appendFileSync('./report.txt', 'epoch: ' + his + ', loss: ' + history[his].loss + '\n', 'utf8');
+                                fs.appendFileSync('./unit4Report.txt', 'epoch: ' + his + ', loss: ' + history[his].loss + '\n', 'utf8');
                             }
 
                             var validationResult = model.predict(validationDataTensor);
@@ -316,19 +180,18 @@ async function main() {
                                 }
 
                                 console.log(checkPoints[checkPoint] + ' : ' + good + ', ' + noGood);
-                                fs.appendFileSync('./report.txt', checkPoints[checkPoint] + ' : ' + good + ', ' + noGood + '\n', 'utf8');
+                                fs.appendFileSync('./unit4Report.txt', checkPoints[checkPoint] + ' : ' + good + ', ' + noGood + '\n', 'utf8');
 
                                 good = 0;
                                 noGood = 0;
                             }
 
-                            model.save('file://./myModelTest').then(async function () {
+                            model.save(`file://../models/${nodes[node]}_[${units[unit]}]`).then(async function () {
                                 console.log('Successfully saved the artifacts.');
-                                fs.appendFileSync('./report.txt', '====================\n', 'utf8');
+                                fs.appendFileSync('./unit4Report.txt', '====================\n', 'utf8');
                                 resolve();
                             });
                         });
-                        */
                     });
                 }
 
