@@ -116,7 +116,7 @@ for (let i = 1; i <= 32; i = i * 2) {
     for (let j = 1; j <= 32; j = j * 2) {
         for (let k = 1; k <= 32; k = k * 2) {
             for (let l = 1; l <= 32; l = l * 2) {
-                units.push([i, j, k, l, 1]);
+                units.push([1, i, j, k, l]);
             }
         }
     }
@@ -135,7 +135,7 @@ async function main() {
                         var history = [];
 
                         var fitParam = {
-                            epochs: 50,
+                            epochs: 20,
                             callbacks: {
                                 onEpochEnd: function (epoch, logs) {
                                     console.log('epoch', epoch, logs, 'RMSE -> ', Math.sqrt(logs.loss));
