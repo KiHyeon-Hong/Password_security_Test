@@ -116,7 +116,7 @@ for (let i = 1; i <= 32; i = i * 2) {
     for (let j = 1; j <= 32; j = j * 2) {
         for (let k = 1; k <= 32; k = k * 2) {
             for (let l = 1; l <= 32; l = l * 2) {
-                units.push([4, j, k, l]);
+                units.push([4, i, j, k, l]);
             }
         }
     }
