@@ -3,7 +3,7 @@ const fs = require('fs');
 var tf = require('@tensorflow/tfjs');
 require('tfjs-node-save');
 
-var oriDatas = fs.readFileSync('../files/leakPasswords.txt', 'utf8');
+var oriDatas = fs.readFileSync(__dirname + '/../files/leakPasswords.txt', 'utf8');
 oriDatas = oriDatas.split('\n');
 
 var datas = [];
@@ -25,7 +25,7 @@ for (let i = 0; i < datas.length; i++) {
     leakDataValue[i] = 0;
 }
 
-oriDatas = fs.readFileSync('../files/notLeakPasswords.txt', 'utf8');
+oriDatas = fs.readFileSync(__dirname + '/../files/notLeakPasswords.txt', 'utf8');
 oriDatas = oriDatas.split('\n');
 
 datas = [];
@@ -104,6 +104,21 @@ for (let i = 64865; i < leakString.length - 1; i++) {
 
 console.log(testData.length);
 
+/*
 for (let i = 0; i < testData.length; i++) {
-    fs.appendFileSync('./test.txt', `${testData[i]}, ${testLabel[i]}\n`, 'utf8');
+    fs.appendFileSync('./test.txt', `${testData[i]},${testLabel[i]}\n`, 'utf8');
 }
+*/
+
+console.log(`====================\n`);
+
+async function passwordValidation() {
+    for (let i = 0; i < testData.length; i++) {
+        const loadedModel = await tf.loadLayersModel('file://' + __dirname + '/../models/3_[32,16,8]/model.json');
+        var predictPoint = loadedModel.predict(tf.tensor([testData[i]]));
+        predictPoint = Array.from(predictPoint.dataSync())[0];
+        console.log(predictPoint);
+    }
+}
+
+passwordValidation();
