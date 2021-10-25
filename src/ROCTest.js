@@ -97,27 +97,24 @@ for (let i = 120103; i < feature1.length; i++) {
 }
 
 for (let i = 64865; i < leakString.length - 1; i++) {
-    testData.push([leakDataFeature1[i], leakDataFeature2[i], leakDataFeature3[i]]);
+    testData.push([parseInt(leakDataFeature1[i]), parseInt(leakDataFeature2[i]), parseInt(leakDataFeature3[i])]);
     testLabel.push(leakDataValue[i]);
-    // fs.appendFileSync('./test.txt', `${leakString[i]}, ${leakDataFeature1[i]}, ${leakDataFeature2[i]}, ${leakDataFeature3[i]}, ${leakDataValue[i]}\n`, 'utf8');
 }
 
 console.log(testData.length);
 
-/*
-for (let i = 0; i < testData.length; i++) {
-    fs.appendFileSync('./test.txt', `${testData[i]},${testLabel[i]}\n`, 'utf8');
-}
-*/
-
 console.log(`====================\n`);
+
+fs.writeFileSync(__dirname + '/../files/ROCTestData.txt', '', 'utf8');
 
 async function passwordValidation() {
     for (let i = 0; i < testData.length; i++) {
         const loadedModel = await tf.loadLayersModel('file://' + __dirname + '/../models/3_[32,16,8]/model.json');
         var predictPoint = loadedModel.predict(tf.tensor([testData[i]]));
+
         predictPoint = Array.from(predictPoint.dataSync())[0];
-        console.log(predictPoint);
+
+        fs.appendFileSync(__dirname + '/../files/ROCTestData.txt', `${predictPoint},${testLabel[i]}\n`, 'utf8');
     }
 }
 
