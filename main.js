@@ -11,4 +11,6 @@ datas.map((data, index) => {
     labels.push(parseInt(data.split(',')[1]));
 });
 
-SimpleROC.simpleROC(predicts, labels, 10);
+// console.log(SimpleROC.simpleROC(predicts, labels, 10));
+
+// console.log(SimpleROC.simpleROC([22, 21, 20, 19, 18, 17, 16, 15, 14, 13], [1, 1, 1, 1, 1, 0, 0, 0, 0, 0], 10));
