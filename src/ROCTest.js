@@ -108,12 +108,16 @@ console.log(`====================\n`);
 fs.writeFileSync(__dirname + '/../files/Unit1ROCData.txt', '', 'utf8');
 async function passwordValidation1() {
     for (let i = 0; i < testData.length; i++) {
-        const loadedModel = await tf.loadLayersModel('file://' + __dirname + '/../models/1_[32]/model.json');
+        const loadedModel = await tf.loadLayersModel('file://' + __dirname + '/../models/1_[4]/model.json');
         var predictPoint = loadedModel.predict(tf.tensor([testData[i]]));
 
         predictPoint = Array.from(predictPoint.dataSync())[0];
 
-        fs.appendFileSync(__dirname + '/../files/Unit1ROCData.txt', `${predictPoint},${testLabel[i]}\n`, 'utf8');
+        fs.appendFileSync(__dirname + '/../files/Unit1ROCData.txt', `${predictPoint},${testLabel[i]}`, 'utf8');
+
+        if (testData.length - 1 != i) {
+            fs.appendFileSync(__dirname + '/../files/Unit1ROCData.txt', `\n`, 'utf8');
+        }
     }
 }
 
@@ -122,12 +126,16 @@ passwordValidation1();
 fs.writeFileSync(__dirname + '/../files/Unit2ROCData.txt', '', 'utf8');
 async function passwordValidation2() {
     for (let i = 0; i < testData.length; i++) {
-        const loadedModel = await tf.loadLayersModel('file://' + __dirname + '/../models/2_[32,16]/model.json');
+        const loadedModel = await tf.loadLayersModel('file://' + __dirname + '/../models/2_[1,1]/model.json');
         var predictPoint = loadedModel.predict(tf.tensor([testData[i]]));
 
         predictPoint = Array.from(predictPoint.dataSync())[0];
 
-        fs.appendFileSync(__dirname + '/../files/Unit2ROCData.txt', `${predictPoint},${testLabel[i]}\n`, 'utf8');
+        fs.appendFileSync(__dirname + '/../files/Unit2ROCData.txt', `${predictPoint},${testLabel[i]}`, 'utf8');
+
+        if (testData.length - 1 != i) {
+            fs.appendFileSync(__dirname + '/../files/Unit2ROCData.txt', `\n`, 'utf8');
+        }
     }
 }
 
@@ -141,7 +149,11 @@ async function passwordValidation3() {
 
         predictPoint = Array.from(predictPoint.dataSync())[0];
 
-        fs.appendFileSync(__dirname + '/../files/Unit3ROCData.txt', `${predictPoint},${testLabel[i]}\n`, 'utf8');
+        fs.appendFileSync(__dirname + '/../files/Unit3ROCData.txt', `${predictPoint},${testLabel[i]}`, 'utf8');
+
+        if (testData.length - 1 != i) {
+            fs.appendFileSync(__dirname + '/../files/Unit3ROCData.txt', `\n`, 'utf8');
+        }
     }
 }
 
@@ -150,12 +162,16 @@ passwordValidation3();
 fs.writeFileSync(__dirname + '/../files/Unit4ROCData.txt', '', 'utf8');
 async function passwordValidation4() {
     for (let i = 0; i < testData.length; i++) {
-        const loadedModel = await tf.loadLayersModel('file://' + __dirname + '/../models/4_[32,32,16,8]/model.json');
+        const loadedModel = await tf.loadLayersModel('file://' + __dirname + '/../models/4_[32,16,8,4]/model.json');
         var predictPoint = loadedModel.predict(tf.tensor([testData[i]]));
 
         predictPoint = Array.from(predictPoint.dataSync())[0];
 
-        fs.appendFileSync(__dirname + '/../files/Unit4ROCData.txt', `${predictPoint},${testLabel[i]}\n`, 'utf8');
+        fs.appendFileSync(__dirname + '/../files/Unit4ROCData.txt', `${predictPoint},${testLabel[i]}`, 'utf8');
+
+        if (testData.length - 1 != i) {
+            fs.appendFileSync(__dirname + '/../files/Unit4ROCData.txt', `\n`, 'utf8');
+        }
     }
 }
 
@@ -164,12 +180,16 @@ passwordValidation4();
 fs.writeFileSync(__dirname + '/../files/Unit5ROCData.txt', '', 'utf8');
 async function passwordValidation5() {
     for (let i = 0; i < testData.length; i++) {
-        const loadedModel = await tf.loadLayersModel('file://' + __dirname + '/../models/5_[32,32,32,16,8]/model.json');
+        const loadedModel = await tf.loadLayersModel('file://' + __dirname + '/../models/5_[32,32,16,8,4]/model.json');
         var predictPoint = loadedModel.predict(tf.tensor([testData[i]]));
 
         predictPoint = Array.from(predictPoint.dataSync())[0];
 
-        fs.appendFileSync(__dirname + '/../files/Unit5ROCData.txt', `${predictPoint},${testLabel[i]}\n`, 'utf8');
+        fs.appendFileSync(__dirname + '/../files/Unit5ROCData.txt', `${predictPoint},${testLabel[i]}`, 'utf8');
+
+        if (testData.length - 1 != i) {
+            fs.appendFileSync(__dirname + '/../files/Unit5ROCData.txt', `\n`, 'utf8');
+        }
     }
 }
 
