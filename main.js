@@ -1,16 +1,21 @@
 const fs = require('fs');
 const SimpleROC = require(__dirname + '/SimpleROC');
 
-let datas = fs.readFileSync(__dirname + '/files/ROCTestData.txt', 'utf8');
-datas = datas.split('\n');
+for (let i = 1; i <= 5; i++) {
+    let datas = fs.readFileSync(__dirname + `/files/Unit${i}ROCData.txt`, 'utf8');
+    datas = datas.split('\n');
 
-let predicts = [];
-let labels = [];
-datas.map((data, index) => {
-    predicts.push(parseFloat(data.split(',')[0]));
-    labels.push(parseInt(data.split(',')[1]));
-});
+    let predicts = [];
+    let labels = [];
+    datas.map((data, index) => {
+        predicts.push(parseFloat(data.split(',')[0]));
+        labels.push(parseInt(data.split(',')[1]));
+    });
 
-// console.log(SimpleROC.simpleROC(predicts, labels, 10));
+    let temp = SimpleROC.simpleROC(predicts, labels, 100);
 
-// console.log(SimpleROC.simpleROC([22, 21, 20, 19, 18, 17, 16, 15, 14, 13], [1, 1, 1, 1, 1, 0, 0, 0, 0, 0], 10));
+    fs.writeFileSync(__dirname + `/GraphData/Unit${i}GraphData.txt`, ``, 'utf8');
+    for (let j = 0; j < temp[0].length; j++) {
+        fs.appendFileSync(__dirname + `/GraphData/Unit${i}GraphData.txt`, `${temp[0][j]},${temp[1][j]}\n`, 'utf8');
+    }
+}
