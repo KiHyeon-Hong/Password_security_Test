@@ -155,7 +155,7 @@ async function main() {
 
                         let start = new Date();
                         model.fit(trainDataTensor, trainLabelTensor, fitParam).then(async function (result) {
-                            fs.appendFileSync('./unit5Report32.txt', 'epoch: ' + his + ', loss: ' + history[history.length - 1].loss + ',', 'utf8');
+                            fs.appendFileSync('./unit5Report32.txt', history[history.length - 1].loss + ',', 'utf8');
 
                             var validationResult = model.predict(validationDataTensor);
                             validationResult = Array.from(validationResult.dataSync());
