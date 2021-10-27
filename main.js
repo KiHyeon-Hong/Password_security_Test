@@ -13,7 +13,8 @@ for (let i = 1; i <= 5; i++) {
     });
 
     let temp = SimpleROC.simpleROC(predicts, labels, 100);
-
+    console.log(temp[2]);
+    /*
     fs.writeFileSync(__dirname + `/GraphData/Unit${i}GraphDataX.txt`, ``, 'utf8');
     fs.writeFileSync(__dirname + `/GraphData/Unit${i}GraphDatay.txt`, ``, 'utf8');
     for (let j = 0; j < temp[0].length; j++) {
@@ -25,4 +26,5 @@ for (let i = 1; i <= 5; i++) {
             fs.appendFileSync(__dirname + `/GraphData/Unit${i}GraphDataY.txt`, `,`, 'utf8');
         }
     }
+    */
 }

@@ -20,6 +20,10 @@ for (let i = 1; i <= 5; i++) {
     let zxcvbnTemp = SimpleROC.simpleROC(zxcvbn, labels, 100);
     let ludsTemp = SimpleROC.simpleROC(luds, labels, 100);
 
+    console.log(zxcvbnTemp[2]);
+    console.log(ludsTemp[2]);
+
+    /*
     fs.writeFileSync(__dirname + `/GraphData/zxcvbnGraphDataX.txt`, ``, 'utf8');
     fs.writeFileSync(__dirname + `/GraphData/zxcvbnGraphDatay.txt`, ``, 'utf8');
     for (let j = 0; j < zxcvbnTemp[0].length; j++) {
@@ -43,4 +47,5 @@ for (let i = 1; i <= 5; i++) {
             fs.appendFileSync(__dirname + `/GraphData/ludsGraphDataY.txt`, `,`, 'utf8');
         }
     }
+    */
 }
