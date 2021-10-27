@@ -140,7 +140,7 @@ async function main() {
                         var model = null;
 
                         model = modelCreateDepth2(units[unit][0], units[unit][1], activationFuncs[activationFunc]);
-                        fs.appendFileSync('./unit2Report.txt', nodes[node] + ',[' + units[unit][0] + ',' + units[unit][1] + ']', 'utf8');
+                        fs.appendFileSync('./unit2Report.txt', nodes[node] + ',[' + units[unit][0] + ',' + units[unit][1] + ']\n', 'utf8');
 
                         let start = new Date();
                         model.fit(trainDataTensor, trainLabelTensor, fitParam).then(async function (result) {

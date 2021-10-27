@@ -143,16 +143,11 @@ async function main() {
                         var model = null;
 
                         model = modelCreateDepth3(units[unit][0], units[unit][1], units[unit][2], activationFuncs[activationFunc]);
-                        fs.appendFileSync(
-                            './unit3Report.txt',
-                            nodes[node] + ', [' + units[unit][0] + ', ' + units[unit][1] + ', ' + units[unit][2] + '], ' + activationFuncs[activationFunc] + '\n',
-                            'utf8'
-                        );
+                        fs.appendFileSync('./unit3Report.txt', nodes[node] + ',[' + units[unit][0] + ',' + units[unit][1] + ',' + units[unit][2] + ']\n', 'utf8');
 
+                        let start = new Date();
                         model.fit(trainDataTensor, trainLabelTensor, fitParam).then(async function (result) {
-                            for (let his = 0; his < history.length; his++) {
-                                fs.appendFileSync('./unit3Report.txt', 'epoch: ' + his + ', loss: ' + history[his].loss + '\n', 'utf8');
-                            }
+                            fs.appendFileSync('./unit3Report.txt', history[history.length - 1].loss + ',', 'utf8');
 
                             var validationResult = model.predict(validationDataTensor);
                             validationResult = Array.from(validationResult.dataSync());
@@ -162,7 +157,7 @@ async function main() {
                             var good = 0;
                             var noGood = 0;
 
-                            var checkPoints = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0];
+                            var checkPoints = [0.5];
 
                             for (let checkPoint = 0; checkPoint < checkPoints.length; checkPoint++) {
                                 for (let i = 0; i < validationResult.length; i++) {
@@ -177,7 +172,7 @@ async function main() {
                                 }
 
                                 console.log(checkPoints[checkPoint] + ' : ' + good + ', ' + noGood);
-                                fs.appendFileSync('./unit3Report.txt', checkPoints[checkPoint] + ' : ' + good + ', ' + noGood + '\n', 'utf8');
+                                fs.appendFileSync('./unit3Report.txt', good + ',' + noGood + ',', 'utf8');
 
                                 good = 0;
                                 noGood = 0;
@@ -185,7 +180,8 @@ async function main() {
 
                             model.save(`file://../models/${nodes[node]}_[${units[unit]}]`).then(async function () {
                                 console.log('Successfully saved the artifacts.');
-                                fs.appendFileSync('./unit3Report.txt', '====================\n', 'utf8');
+                                let finish = new Date();
+                                fs.appendFileSync('./unit3Report.txt', finish - start + '\n', 'utf8');
                                 resolve();
                             });
                         });
