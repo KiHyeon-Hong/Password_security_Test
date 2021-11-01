@@ -1,3 +1,3 @@
--   https://kihyeon-hong.github.io/Password_security_test/analysis/1.%20ROC_curve.html
--   https://kihyeon-hong.github.io/Password_security_test/analysis/1.%20LeakPasswordAnalysis.html
--   https://kihyeon-hong.github.io/Password_security_test/analysis/1.%20Performace_graph.html
+-   https://kihyeon-hong.github.io/Password_security_test/analysis/performace_graph
+-   https://kihyeon-hong.github.io/Password_security_test/analysis/leak_password_analysis
+-   https://kihyeon-hong.github.io/Password_security_test/analysis/roc_curve
