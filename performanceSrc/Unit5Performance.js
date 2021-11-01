@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-let datas = fs.readFileSync(__dirname + '/../performanceData/unit5Report32.txt', 'utf8');
+let datas = fs.readFileSync(__dirname + '/../performanceData/unit5Report1.txt', 'utf8');
 datas = datas.split('\n');
 
 let performanceData = datas.filter((data, index) => {
