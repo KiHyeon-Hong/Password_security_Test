@@ -10,58 +10,58 @@
 
 #### /analysis
 
--   논문 실험 데이터 시각화 디렉터리
+-   Experiment visualization files.
 
 #### /etc
 
--   기타 테스트 코드
+-   Test code.
 
 #### /files
 
--   Password list
--   기존 모델과 비교를 위한 특징 및 라벨 추출 파일
+-   Password list files.
+-   Password label, and feature matrix.
 
 #### /graphData
 
--   ROC 곡선을 위한 각 비밀번호 보안성 평가모델들의 fpr, tpr 파일
--   npm i simple_roc 이용
+-   ROC curve data from password security evaluation models.
+-   npm i simple_roc.
+-   fpr, tpr data.
 
 #### /graphSrc
 
--   제안한 평가모델과 기존의 평가모델로 추출한 fpr, tpr 코드
+-   fpr, tpr dasta extracted with the proposed evaluation model.
+-   fpr, tpr dasta extracted with the existing evaluation model.
 
 #### /models
 
--   학습한 모델의 성능을 평가하기 위한 9,330개의 평가모델 학습 결과
-
-#### /models_backup
-
--   학습된 평가모델 백업 파일
+-   9,330 learning models.
 
 #### /performanceData
 
--   테스트 데이터로 평가한 각 은닉층 별 손실값, 정확도, 학습 시간 파일
+-   Model performance evaluated by test data.
+-   Loss, accuracy, and training time by hidden layer.
 
 #### /performanceSrc
 
--   테스트 데이터로 평가한 각 은닉층 별 손실값, 정확도, 학습 시간 코드
+-   Model performance evaluated by test code.
+-   Loss, accuracy, and training time by hidden layer.
 
 #### /preprocessingSrc
 
--   제안한 평가모델과 기존의 평가모델의 성능 비교를 위한 전처리 코드
+-   Pre-processing code for visualizing model performance evaluation.
 
 #### /ROCData
 
--   ROC 곡선을 그리기 위한 예측 결과와 실제 정답 데이터 파일
+-   Model prediction result and actual label data.
 
 #### /ROCSrc
 
--   ROC 곡선을 그리기 위한 예측 결과와 실제 정답 데이터 코드
+-   Model prediction result and actual label data code.
 
 #### /trainingData
 
--   은닉층에 따른 모든 경우의 수를 학습한 로그 파일
+-   Training log file according to the depth of the hidden layer.
 
 #### /trainingSrc
 
--   은닉층에 따른 모든 경우의 수를 학습하는 코드
+-   Training code according to the depth of the hidden layer.
